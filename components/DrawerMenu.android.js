@@ -9,8 +9,8 @@ var DrawerMenu = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <DrawerMenuItem {...this.props} scene="cards" label="View Cards" />
-        <DrawerMenuItem {...this.props} scene="services" label="View Services" />
+        <DrawerMenuItem scene="cards" label="View Cards" onDrawerItemPress={this.props.onMenuSelect} />
+        <DrawerMenuItem scene="services" label="View Services" onDrawerItemPress={this.props.onMenuSelect} />
       </View>
     );
   }

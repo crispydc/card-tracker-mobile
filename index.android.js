@@ -6,102 +6,60 @@
 import React, {
   AppRegistry,
   Component,
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
+  Navigator,
   DrawerLayoutAndroid,
-  ToolbarAndroid
+  Dimensions,
+  StatusBar
 } from 'react-native';
+var AppRoutes = require('./components/AppRoutes');
+var MainNav = require('./components/MainNavigation.android');
 var DrawerMenu = require('./components/DrawerMenu.android');
-var CardsScene = require('./scenes/CardsScene');
-var ServicesScene = require('./scenes/ServicesScene');
 
 var CardTracker = React.createClass({
-  getInitialState: function() {
-    return {
-      scene: "cards"
-    };
-  },
+
   render: function() {
+    var navMenu = (
+      <DrawerMenu onMenuSelect={this.onMenuSelect} />
+    );
+
     return (
       <DrawerLayoutAndroid
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         drawerWidth={Dimensions.get('window').width - 54}
         ref={(drawer) => { this.drawer = drawer; }}
-        renderNavigationView={() => this.renderNavigation()}>
-        {this.renderScene()}
+        renderNavigationView={() => navMenu}>
+        <StatusBar backgroundColor="#0288D1" />
+        <Navigator
+          initialRoute={AppRoutes.getRoute('cards')}
+          configureScene={(route, routeStack) => {
+            if(route.animate) {
+              return route.animate;
+            }
+          }}
+          renderScene={(route, navigator) => {
+            if(route.useMainNav) {
+              return (
+                <MainNav navigator={navigator} onIconPress={this.openNav} navTitle={route.navTitle} scene={route.scene} />
+              );
+            } else {
+              //route controls its own fate
+              return React.createElement(route.scene, {navigator: navigator});
+            }
+            throw new Error('Error during navigator scene rendering');
+          }}
+          ref={(navigator) => {this.navigator = navigator;}}
+        />
       </DrawerLayoutAndroid>
     );
   },
 
-  onDrawerItemPress: function(scene: string) {
-      this.setState({scene: scene});
-      this.drawer.closeDrawer();
+  openNav: function() {
+    this.drawer.openDrawer();
   },
 
-  renderNavigation: function() {
-    return (
-      <DrawerMenu onDrawerItemPress={this.onDrawerItemPress} />
-    );
-  },
-
-  getCurrentScene: function() {
-    if(this.state.scene === 'cards') {
-      return (
-        <CardsScene />
-      );
-    } else if(this.state.scene === 'services') {
-      return (
-        <ServicesScene />
-      );
-    }
-  },
-
-  renderToolbar: function() {
-    var title;
-    if(this.state.scene === 'cards') {
-      title = 'Cards';
-    } else if (this.state.scene === 'services') {
-      title = 'Services';
-    }
-
-    return (
-      <ToolbarAndroid
-        navIcon={require('image!ic_menu_black_24dp')}
-        onIconClicked={() => this.drawer.openDrawer()}
-        style={styles.toolbar}
-        title={title}
-        ref={(toolbar) => {this.toolbar = toolbar} }
-      />
-    );
-  },
-
-  renderScene: function() {
-    return (
-      <View style={{flex: 1}}>
-        {this.renderToolbar()}
-        {this.getCurrentScene()}
-      </View>
-    );
-  }
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  toolbar: {
-    backgroundColor: '#00BCD4',
-    height: 56,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  onMenuSelect: function(scene) {
+    this.navigator.replace(AppRoutes.getRoute(scene));
+    this.drawer.closeDrawer();
   }
 });
 
