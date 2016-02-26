@@ -32,9 +32,10 @@ var CardTracker = React.createClass({
         <Navigator
           initialRoute={AppRoutes.getRoute('cards')}
           configureScene={(route, routeStack) => {
-            if(route.animate) {
-              return route.animate;
+            if(route.sceneConfig) {
+              return route.sceneConfig;
             }
+            return Navigator.SceneConfigs.FadeAndroid;
           }}
           renderScene={(route, navigator) => {
             if(route.useMainNav) {
