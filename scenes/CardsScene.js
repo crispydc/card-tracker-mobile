@@ -3,13 +3,11 @@ import React, {
   View,
   Text,
   TouchableNativeFeedback,
-  StyleSheet
+  StyleSheet,
+  Navigator
 } from 'react-native';
 
 var CardsScene = React.createClass({
-  launchAddNewCard: function() {
-    console.log('new card!');
-  },
 
   render: function() {
     return (
@@ -17,13 +15,21 @@ var CardsScene = React.createClass({
         <Text style={styles.welcome}>
           Cards View
         </Text>
-        <TouchableNativeFeedback background={TouchableNativeFeedback.SelectableBackground()}>
+        <TouchableNativeFeedback onPress={this.onAddCardPress}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>+</Text>
             </View>
         </TouchableNativeFeedback>
       </View>
     );
+  },
+
+  onAddCardPress: function() {
+    this.props.navigator.push({
+      scene: require('./AddCardScene'),
+      useMainNav: false,
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
+    });
   }
 });
 
