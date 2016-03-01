@@ -9,9 +9,10 @@ import React, {
   TextInput,
   Picker
 } from 'react-native';
+var LoadingIndicator = require('../components/LoadingIndicator.android');
 
 var AddCardScene = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
       return {
         name: '',
         type: 'visa',
@@ -19,7 +20,7 @@ var AddCardScene = React.createClass({
       }
   },
 
-  render: function() {
+  render() {
     return (
       <View style={{flex:1}}>
         <ToolbarAndroid
@@ -32,14 +33,14 @@ var AddCardScene = React.createClass({
         <View style={styles.mainContainer}>
           <View style={styles.formRow}>
             <Text style={styles.labelText}>Card Name</Text>
-            <TextInput style={{flex:1}} onChangeText={(text) => this.setState({'name':text})} />
+            <TextInput style={{flex:1}} onChangeText={(name) => this.setState({name})} />
           </View>
           <View style={styles.formRow}>
             <Text style={styles.labelText}>Card Type</Text>
             <Picker
               style={{width: 150}}
               selectedValue={this.state.type}
-              onValueChange={(type) => this.setState({type: type})}>
+              onValueChange={(type) => this.setState({type})}>
               <Picker.Item label="Visa" value="visa" />
               <Picker.Item label="Mastercard" value="mc" />
               <Picker.Item label="Amex" value="amex" />
@@ -48,15 +49,28 @@ var AddCardScene = React.createClass({
           </View>
           <View style={styles.formRow}>
             <Text style={styles.labelText}>Last 4</Text>
-            <TextInput style={{width: 150}} onChangeText={(text) => this.setState({'last4':text})} keyboardType="numeric" maxLength={4} />
+            <TextInput style={{width: 150}} onChangeText={(last4) => this.setState({last4})} keyboardType="numeric" maxLength={4} />
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableNativeFeedback onPress={this.saveCard} background={TouchableNativeFeedback.Ripple('#00695C')}>
+              <View style={styles.button}>
+                <Text style={{color: '#FFFFFF'}}>Save Card</Text>
+              </View>
+            </TouchableNativeFeedback>
           </View>
         </View>
+        <LoadingIndicator ref={(loader) => this.loadIndicator = loader} />
       </View>
     );
   },
 
-  onBackPress: function() {
+  onBackPress() {
     this.props.navigator.pop();
+  },
+
+  saveCard() {
+    this.loadIndicator.show();
+    setTimeout(() => this.props.navigator.pop(), 2000);
   }
 });
 
@@ -67,7 +81,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5F5F5'
   },
   formRow: {
     flexDirection: 'row',
@@ -82,6 +96,16 @@ const styles = StyleSheet.create({
   fullInput: {
     width: 500,
     alignSelf: 'stretch'
+  },
+  buttonContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    padding: 10
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#00BFA5',
+    elevation: 5
   }
 });
 

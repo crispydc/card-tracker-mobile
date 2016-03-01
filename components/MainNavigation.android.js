@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   toolbar: {
-    backgroundColor: '#03A9F4',
+    backgroundColor: '#2196F3',
     height: 56
   }
 });

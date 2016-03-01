@@ -17,7 +17,7 @@ var DrawerMenu = require('./components/DrawerMenu.android');
 
 var CardTracker = React.createClass({
 
-  render: function() {
+  render() {
     var navMenu = (
       <DrawerMenu onMenuSelect={this.onMenuSelect} />
     );
@@ -26,9 +26,9 @@ var CardTracker = React.createClass({
       <DrawerLayoutAndroid
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         drawerWidth={Dimensions.get('window').width - 54}
-        ref={(drawer) => { this.drawer = drawer; }}
+        ref={(drawer) => this.drawer = drawer}
         renderNavigationView={() => navMenu}>
-        <StatusBar backgroundColor="#0288D1" />
+        <StatusBar backgroundColor="#1976D2" />
         <Navigator
           initialRoute={AppRoutes.getRoute('cards')}
           configureScene={(route, routeStack) => {
@@ -44,21 +44,21 @@ var CardTracker = React.createClass({
               );
             } else {
               //route controls its own fate
-              return React.createElement(route.scene, {navigator: navigator});
+              return React.createElement(route.scene, {navigator});
             }
             throw new Error('Error during navigator scene rendering');
           }}
-          ref={(navigator) => {this.navigator = navigator;}}
+          ref={(navigator) => this.navigator = navigator}
         />
       </DrawerLayoutAndroid>
     );
   },
 
-  openNav: function() {
+  openNav() {
     this.drawer.openDrawer();
   },
 
-  onMenuSelect: function(scene) {
+  onMenuSelect(scene) {
     this.navigator.replace(AppRoutes.getRoute(scene));
     this.drawer.closeDrawer();
   }

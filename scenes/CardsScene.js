@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5F5F5'
   },
   welcome: {
     fontSize: 20,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   button: {
     width: 50,
     height: 50,
-    backgroundColor: '#03A9F4',
+    backgroundColor: '#00BFA5',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
