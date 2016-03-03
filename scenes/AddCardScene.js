@@ -9,9 +9,10 @@ import React, {
   TextInput,
   Picker
 } from 'react-native';
-var LoadingIndicator = require('../components/LoadingIndicator.android');
+const LoadingIndicator = require('../components/LoadingIndicator.android');
+const Card = require('../data/card');
 
-var AddCardScene = React.createClass({
+const AddCardScene = React.createClass({
   getInitialState() {
       return {
         name: '',
@@ -70,7 +71,23 @@ var AddCardScene = React.createClass({
 
   saveCard() {
     this.loadIndicator.show();
-    setTimeout(() => this.props.navigator.pop(), 2000);
+
+    //create card Object
+    const card = new Card(null, {
+      name: this.state.name,
+      last4: this.state.last4,
+      type: this.state.type
+    });
+
+    //use user object to save card
+    this.props.user.addCard(card, (error) => {
+      if(error) {
+        //figure out what to do here - show dialog?
+        console.error('problem saving new card: ' + error);
+      } else {
+        this.props.navigator.pop();
+      }
+    });
   }
 });
 

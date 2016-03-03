@@ -25,7 +25,7 @@ var MainNav = React.createClass({
           style={styles.toolbar}
         />
         <View style={styles.container}>
-          <CurrentScene navigator={this.props.navigator} />
+          <CurrentScene navigator={this.props.navigator} user={this.props.user} />
         </View>
       </View>
     );

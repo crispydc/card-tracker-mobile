@@ -8,13 +8,23 @@ import React, {
 } from 'react-native';
 
 var CardsScene = React.createClass({
+  getInitialState() {
+    return {
+        cards: this.props.user.cards
+    }
+  },
 
-  render: function() {
+  render() {
+    //setup cards list - convert to array
+    const cardList = Object.keys(this.state.cards).map((k) => {return this.state.cards[k]});
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Cards View
-        </Text>
+        <View style={styles.cardList}>
+          {cardList.map((card) => {
+            return <Text key={card.id}>{card.id} : {card.name}</Text>;
+          })}
+        </View>
         <TouchableNativeFeedback onPress={this.onAddCardPress}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>+</Text>
@@ -24,7 +34,7 @@ var CardsScene = React.createClass({
     );
   },
 
-  onAddCardPress: function() {
+  onAddCardPress() {
     this.props.navigator.push({
       scene: require('./AddCardScene'),
       useMainNav: false,
@@ -36,15 +46,11 @@ var CardsScene = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: '#F5F5F5'
+    backgroundColor: '#F5F5F5',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  cardList: {
+    padding: 20
   },
   button: {
     width: 50,

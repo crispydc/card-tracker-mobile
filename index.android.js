@@ -11,11 +11,16 @@ import React, {
   Dimensions,
   StatusBar
 } from 'react-native';
-var AppRoutes = require('./components/AppRoutes');
-var MainNav = require('./components/MainNavigation.android');
-var DrawerMenu = require('./components/DrawerMenu.android');
+const AppRoutes = require('./components/AppRoutes');
+const MainNav = require('./components/MainNavigation.android');
+const DrawerMenu = require('./components/DrawerMenu.android');
+const User = require('./data/user');
 
-var CardTracker = React.createClass({
+//create user object - login immediately for now
+const user = new User();
+user.login();
+
+const CardTracker = React.createClass({
 
   render() {
     var navMenu = (
@@ -40,11 +45,11 @@ var CardTracker = React.createClass({
           renderScene={(route, navigator) => {
             if(route.useMainNav) {
               return (
-                <MainNav navigator={navigator} onIconPress={this.openNav} navTitle={route.navTitle} scene={route.scene} />
+                <MainNav navigator={navigator} user={user} onIconPress={this.openNav} navTitle={route.navTitle} scene={route.scene} />
               );
             } else {
               //route controls its own fate
-              return React.createElement(route.scene, {navigator});
+              return React.createElement(route.scene, {navigator, user});
             }
             throw new Error('Error during navigator scene rendering');
           }}
