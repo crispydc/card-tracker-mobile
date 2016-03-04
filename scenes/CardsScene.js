@@ -26,6 +26,13 @@ var CardsScene = React.createClass({
       cardlist.push(card);
       this.setState({cardlist});
     });
+    this.state.cardsService.onCardDelete((removedId) => {
+      const cardlist = this.state.cardlist;
+      const filteredCards = cardlist.filter((c) => {
+        return c.id != removedId;
+      });
+      this.setState({cardlist: filteredCards});
+    });
   },
 
   componentWillUnmount() {

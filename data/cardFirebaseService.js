@@ -14,11 +14,21 @@ class CardFirebaseService extends BaseFirebaseService {
     this.cardsRef.push(card.getJSONData(), callback);
   }
 
+  deleteCard(id, callback = function() {}) {
+    this.cardsRef.child(id).set(null);
+  }
+
   onCardAdd(callback) {
     this.cardsRef.on('child_added', (snapshot) => {
       const cardDetails = snapshot.val();
       const newCard = new Card(snapshot.key(), cardDetails);
       callback(newCard);
+    });
+  }
+
+  onCardDelete(callback) {
+    this.cardsRef.on('child_removed', (snapshot) => {
+      callback(snapshot.key());
     });
   }
 
