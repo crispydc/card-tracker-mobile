@@ -14,11 +14,6 @@ import React, {
 const AppRoutes = require('./components/AppRoutes');
 const MainNav = require('./components/MainNavigation.android');
 const DrawerMenu = require('./components/DrawerMenu.android');
-const User = require('./data/user');
-
-//create user object - login immediately for now
-const user = new User();
-user.login();
 
 const CardTracker = React.createClass({
 
@@ -45,11 +40,11 @@ const CardTracker = React.createClass({
           renderScene={(route, navigator) => {
             if(route.useMainNav) {
               return (
-                <MainNav navigator={navigator} user={user} onIconPress={this.openNav} navTitle={route.navTitle} scene={route.scene} />
+                <MainNav navigator={navigator} onIconPress={this.openNav} navTitle={route.navTitle} scene={route.scene} />
               );
             } else {
               //route controls its own fate
-              return React.createElement(route.scene, {navigator, user});
+              return React.createElement(route.scene, {navigator});
             }
             throw new Error('Error during navigator scene rendering');
           }}

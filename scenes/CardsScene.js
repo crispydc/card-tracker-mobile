@@ -6,25 +6,36 @@ import React, {
   StyleSheet,
   Navigator
 } from 'react-native';
+const CardList = require('../components/CardList');
+const CardService = require('../data/cardFirebaseService');
 
 var CardsScene = React.createClass({
+
   getInitialState() {
     return {
-        cards: this.props.user.cards
+      cardlist: [],
+      cardsService: new CardService()
     }
   },
 
-  render() {
-    //setup cards list - convert to array
-    const cardList = Object.keys(this.state.cards).map((k) => {return this.state.cards[k]});
+  componentWillMount() {
+    //setup data listeners
+    this.state.cardsService.onCardAdd((card) => {
+      let cardlist = this.state.cardlist;
+      cardlist.push(card);
+      this.setState({cardlist});
+    });
+  },
 
+  componentWillUnmount() {
+    //clean up data listeners
+    this.state.cardsService.detachAll();
+  },
+
+  render() {
     return (
       <View style={styles.container}>
-        <View style={styles.cardList}>
-          {cardList.map((card) => {
-            return <Text key={card.id}>{card.id} : {card.name}</Text>;
-          })}
-        </View>
+        <CardList cardList={this.state.cardlist} />
         <TouchableNativeFeedback onPress={this.onAddCardPress}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>+</Text>

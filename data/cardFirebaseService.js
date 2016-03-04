@@ -14,16 +14,20 @@ class CardFirebaseService extends BaseFirebaseService {
     this.cardsRef.push(card.getJSONData(), callback);
   }
 
-  saveCard(card) {
-    this.cardsRef.child(card.id).update(card.getJSONData());
-  }
-
   onCardAdd(callback) {
     this.cardsRef.on('child_added', (snapshot) => {
       const cardDetails = snapshot.val();
       const newCard = new Card(snapshot.key(), cardDetails);
       callback(newCard);
     });
+  }
+
+  detachAll() {
+    this.cardsRef.off();
+  }
+
+  detach(eventType) {
+    this.cardsRef.off(eventType);
   }
 }
 
