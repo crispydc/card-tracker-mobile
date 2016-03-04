@@ -27,20 +27,13 @@ var MainNav = React.createClass({
           titleColor="#FFFFFF"
           style={styles.toolbar}
         />
-        <View style={styles.container}>
-          <CurrentScene navigator={this.props.navigator} user={this.props.user} />
-        </View>
+        <CurrentScene navigator={this.props.navigator} />
       </View>
     );
   }
 });
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   toolbar: {
     backgroundColor: '#2196F3',
     height: 56

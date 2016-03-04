@@ -68,9 +68,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#F5F5F5',
   },
-  cardList: {
-    padding: 20
-  },
   addContainer: {
     width: 50,
     height: 50,

@@ -23,6 +23,7 @@ var CardList = React.createClass({
 
 const styles = StyleSheet.create({
   cardList: {
+    flex:1
   }
 });
 
