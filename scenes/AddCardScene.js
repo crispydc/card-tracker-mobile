@@ -12,6 +12,7 @@ import React, {
 const LoadingIndicator = require('../components/LoadingIndicator.android');
 const Card = require('../data/card');
 const Icon = require('react-native-vector-icons/MaterialIcons');
+const CardService = require('../data/cardFirebaseService');
 
 const AddCardScene = React.createClass({
   getInitialState() {
@@ -83,7 +84,8 @@ const AddCardScene = React.createClass({
     });
 
     //use user object to save card
-    this.props.user.addCard(card, (error) => {
+    const service = new CardService();
+    service.addCard(card, (error) => {
       if(error) {
         //figure out what to do here - show dialog?
         console.error('problem saving new card: ' + error);
