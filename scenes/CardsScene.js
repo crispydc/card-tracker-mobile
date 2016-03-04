@@ -46,7 +46,7 @@ var CardsScene = React.createClass({
         <CardList cardList={this.state.cardlist} />
         <TouchableNativeFeedback onPress={this.onAddCardPress}>
             <View style={styles.addContainer}>
-              <Icon style={styles.button} name="add-circle" />
+              <Icon style={styles.button} name="add" />
             </View>
         </TouchableNativeFeedback>
       </View>
@@ -72,14 +72,22 @@ const styles = StyleSheet.create({
     padding: 20
   },
   addContainer: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#00BFA5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
     position: 'absolute',
     bottom: 25,
     right: 25,
     elevation: 10
   },
   button: {
-    color: '#00BFA5',
-    fontSize: 56
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 30,
+    textAlignVertical: 'center'
   }
 });
 
