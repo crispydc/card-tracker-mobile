@@ -8,6 +8,7 @@ import React, {
 } from 'react-native';
 const CardList = require('../components/CardList');
 const CardService = require('../data/cardFirebaseService');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 
 var CardsScene = React.createClass({
 
@@ -37,8 +38,8 @@ var CardsScene = React.createClass({
       <View style={styles.container}>
         <CardList cardList={this.state.cardlist} />
         <TouchableNativeFeedback onPress={this.onAddCardPress}>
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>+</Text>
+            <View style={styles.addContainer}>
+              <Icon style={styles.button} name="add-circle" />
             </View>
         </TouchableNativeFeedback>
       </View>
@@ -63,23 +64,15 @@ const styles = StyleSheet.create({
   cardList: {
     padding: 20
   },
-  button: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#00BFA5',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 25,
+  addContainer: {
     position: 'absolute',
-    bottom: 35,
-    right: 35,
+    bottom: 25,
+    right: 25,
     elevation: 10
   },
-  buttonText: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontSize: 30,
-    textAlignVertical: 'center'
+  button: {
+    color: '#00BFA5',
+    fontSize: 56
   }
 });
 

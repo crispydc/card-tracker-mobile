@@ -11,6 +11,7 @@ import React, {
 } from 'react-native';
 const LoadingIndicator = require('../components/LoadingIndicator.android');
 const Card = require('../data/card');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 
 const AddCardScene = React.createClass({
   getInitialState() {
@@ -24,8 +25,10 @@ const AddCardScene = React.createClass({
   render() {
     return (
       <View style={{flex:1}}>
-        <ToolbarAndroid
-          navIcon={require('image!ic_close_white_24dp')}
+        <Icon.ToolbarAndroid
+          navIconName="close"
+          iconSize={32}
+          iconColor="#FFFFFF"
           onIconClicked={this.onBackPress}
           title="Add Card"
           titleColor="#FFFFFF"

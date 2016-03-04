@@ -7,7 +7,8 @@ import React, {
   View,
   StyleSheet
 } from 'react-native';
-var DrawerMenu = require('./DrawerMenu.android');
+const DrawerMenu = require('./DrawerMenu.android');
+const Icon = require('react-native-vector-icons/MaterialIcons');
 
 var MainNav = React.createClass({
 
@@ -17,8 +18,10 @@ var MainNav = React.createClass({
 
     return (
       <View style={{flex:1}}>
-        <ToolbarAndroid
-          navIcon={require('image!ic_menu_white_24dp')}
+        <Icon.ToolbarAndroid
+          navIconName="menu"
+          iconColor="#FFFFFF"
+          iconSize={32}
           onIconClicked={this.props.onIconPress}
           title={this.props.navTitle}
           titleColor="#FFFFFF"
