@@ -6,6 +6,7 @@ import React, {
   StyleSheet,
   Navigator
 } from 'react-native';
+const CardListItem = require('./CardListItem');
 
 var CardList = React.createClass({
 
@@ -13,7 +14,7 @@ var CardList = React.createClass({
     return (
       <View style={styles.cardList}>
         {this.props.cardList.map((card) => {
-          return <Text key={card.id}>{card.id} : {card.name}</Text>;
+          return <CardListItem key={card.id} name={card.name} last4={card.last4}/>;
         })}
       </View>
     );
@@ -22,7 +23,6 @@ var CardList = React.createClass({
 
 const styles = StyleSheet.create({
   cardList: {
-    padding: 20
   }
 });
 
