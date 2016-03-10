@@ -27,7 +27,7 @@ var MainNav = React.createClass({
           titleColor="#FFFFFF"
           style={styles.toolbar}
         />
-        <CurrentScene navigator={this.props.navigator} />
+      <CurrentScene {...this.props} />
       </View>
     );
   }

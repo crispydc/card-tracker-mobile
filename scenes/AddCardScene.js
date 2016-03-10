@@ -13,6 +13,7 @@ const LoadingIndicator = require('../components/LoadingIndicator.android');
 const Card = require('../data/card');
 const Icon = require('react-native-vector-icons/MaterialIcons');
 const CardService = require('../data/cardFirebaseService');
+const SubmitButton = require('../components/SubmitButton.android');
 
 const AddCardScene = React.createClass({
   getInitialState() {
@@ -57,11 +58,7 @@ const AddCardScene = React.createClass({
             <TextInput style={{width: 150}} onChangeText={(last4) => this.setState({last4})} keyboardType="numeric" maxLength={4} />
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableNativeFeedback onPress={this.saveCard} background={TouchableNativeFeedback.Ripple('#00695C')}>
-              <View style={styles.button}>
-                <Text style={{color: '#FFFFFF'}}>Save Card</Text>
-              </View>
-            </TouchableNativeFeedback>
+            <SubmitButton label="Add Card" onPress={this.saveCard} />
           </View>
         </View>
         <LoadingIndicator ref={(loader) => this.loadIndicator = loader} />
@@ -84,7 +81,7 @@ const AddCardScene = React.createClass({
     });
 
     //use user object to save card
-    const service = new CardService();
+    const service = new CardService(this.props.uid);
     service.addCard(card, (error) => {
       if(error) {
         //figure out what to do here - show dialog?
@@ -123,11 +120,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 10
-  },
-  button: {
-    padding: 10,
-    backgroundColor: '#00BFA5',
-    elevation: 5
   }
 });
 

@@ -14,19 +14,21 @@ var CardsScene = React.createClass({
 
   getInitialState() {
     return {
-      cardlist: [],
-      cardsService: new CardService()
+      cardlist: []
     }
   },
 
   componentWillMount() {
+    //create card service
+    const cardsService = new CardService(this.props.uid);
+
     //setup data listeners
-    this.state.cardsService.onCardAdd((card) => {
+    cardsService.onCardAdd((card) => {
       let cardlist = this.state.cardlist;
       cardlist.push(card);
       this.setState({cardlist});
     });
-    this.state.cardsService.onCardDelete((removedId) => {
+    cardsService.onCardDelete((removedId) => {
       const cardlist = this.state.cardlist;
       const filteredCards = cardlist.filter((c) => {
         return c.id != removedId;
@@ -37,13 +39,14 @@ var CardsScene = React.createClass({
 
   componentWillUnmount() {
     //clean up data listeners
-    this.state.cardsService.detachAll();
+    const cardsService = new CardService(this.props.uid);
+    cardsService.detachAll();
   },
 
   render() {
     return (
       <View style={styles.container}>
-        <CardList cardList={this.state.cardlist} />
+        <CardList cardList={this.state.cardlist} uid={this.props.uid} />
         <TouchableNativeFeedback onPress={this.onAddCardPress}>
             <View style={styles.addContainer}>
               <Icon style={styles.button} name="add" />

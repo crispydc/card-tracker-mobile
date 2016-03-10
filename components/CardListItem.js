@@ -42,7 +42,7 @@ var CardItem = React.createClass({
   },
 
   deleteCard() {
-    const service = new CardService();
+    const service = new CardService(this.props.uid);
     service.deleteCard(this.props.card.id);
   }
 });

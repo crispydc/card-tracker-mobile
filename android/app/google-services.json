@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "card-tracker-c6fa8",
+    "project_number": "172938064948",
+    "name": "Card Tracker"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172938064948:android:3aa68a186392e864",
+        "client_id": "android:com.cardtracker",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.cardtracker",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172938064948-p279losovgii6ub49cbsbkt6p4tn616j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardtracker",
+            "certificate_hash": "9B2DFF1AB8C17C0EFB3E67777E783AC196CB7DA7"
+          }
+        },
+        {
+          "client_id": "172938064948-n9v59nknuiimdgv3bbqhpeaafd7l7f3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

@@ -10,6 +10,10 @@ class BaseFirebaseService {
       return BASE_FIREBASE_URL + '/' + relURL;
     }
   }
+
+  getBaseRefURL() {
+    return BASE_FIREBASE_URL;
+  }
 }
 
 module.exports = BaseFirebaseService;

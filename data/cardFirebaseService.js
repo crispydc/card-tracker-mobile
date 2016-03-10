@@ -5,9 +5,9 @@ const BaseFirebaseService = require('./baseFirebaseService');
 const Card = require('./card');
 
 class CardFirebaseService extends BaseFirebaseService {
-  constructor() {
+  constructor(userid) {
     super();
-    this.cardsRef = new Firebase(super.constructRefURL('/cards'));
+    this.cardsRef = new Firebase(super.constructRefURL('/users/' + userid + '/cards'));
   }
 
   addCard(card, callback = function() {}) {

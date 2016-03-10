@@ -5,6 +5,9 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
+import co.apptailor.googlesignin.RNGoogleSigninModule;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,8 +38,18 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
+            new RNGoogleSigninPackage(this),
             new MainReactPackage(),
         new VectorIconsPackage()
         );
+    }
+
+    // Google signin button support
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, android.content.Intent data) {
+      if (requestCode == RNGoogleSigninModule.RC_SIGN_IN) {
+          RNGoogleSigninModule.onActivityResult(data);
+      }
+      super.onActivityResult(requestCode, resultCode, data);
     }
 }

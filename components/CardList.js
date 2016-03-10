@@ -14,7 +14,7 @@ var CardList = React.createClass({
     return (
       <View style={styles.cardList}>
         {this.props.cardList.map((card) => {
-          return <CardListItem key={card.id} card={card} />;
+          return <CardListItem key={card.id} card={card} uid={this.props.uid} />;
         })}
       </View>
     );
