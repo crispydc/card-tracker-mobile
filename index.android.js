@@ -9,7 +9,8 @@ import React, {
   Navigator,
   DrawerLayoutAndroid,
   Dimensions,
-  StatusBar
+  StatusBar,
+  AsyncStorage
 } from 'react-native';
 
 const AppRoutes = require('./components/AppRoutes');
@@ -17,6 +18,8 @@ const MainNav = require('./components/MainNavigation.android');
 const DrawerMenu = require('./components/DrawerMenu.android');
 const LoginScene = require('./scenes/PasswordLoginScene');
 const AuthFirebaseService = require('./data/authFirebaseService');
+
+const TOKEN_KEY = "AUTH_TOKEN";
 
 const CardTracker = React.createClass({
 
@@ -27,7 +30,16 @@ const CardTracker = React.createClass({
   },
 
   componentDidMount() {
-    //add auth check
+    //check storage for auth token
+    AsyncStorage.getItem(TOKEN_KEY, (error, authToken) => {
+      if(authToken !== null) {
+        //attempt Firebase login using token
+        const authService = new AuthFirebaseService();
+        authService.authWithToken(authToken, (authData) => {
+          this.setState({user: authData});
+        });
+      }
+    });
   },
 
   render() {
@@ -90,7 +102,15 @@ const CardTracker = React.createClass({
     //firebase Login
     const authService = new AuthFirebaseService();
     authService.authWithPassword(credentials, (authData) => {
-        this.setState({user: authData});
+      //save token into storage
+      AsyncStorage.setItem(TOKEN_KEY, authData.token, (error) => {
+        if(error) {
+          console.warn('error saving auth token: ', error);
+        } else {
+          console.log('successfully saved auth token.');
+        }
+      });
+      this.setState({user: authData});
     });
   },
 
@@ -98,6 +118,9 @@ const CardTracker = React.createClass({
     const authService = new AuthFirebaseService();
     authService.logout();
     this.setState({user: null});
+
+    //remove stored auth token
+    AsyncStorage.removeItem(TOKEN_KEY);
   }
 });
 

@@ -33,6 +33,18 @@ class AuthFirebaseService extends BaseFirebaseService {
     });
   }
 
+  authWithToken(token, callback) {
+    console.log('attempting token Firebase login... ', token);
+    this.authRef.authWithCustomToken(token, (error, authData) => {
+        if(error) {
+          console.log('Login error: ', error);
+        } else {
+          console.log("Authenticated successfully with payload:", authData);
+          callback(authData);
+        }
+    });
+  }
+
   logout() {
     this.authRef.unauth();
   }
