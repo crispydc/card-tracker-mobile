@@ -12,10 +12,6 @@ import React, {
   StatusBar
 } from 'react-native';
 
-import {
-  GoogleSignin
-} from 'react-native-google-signin';
-
 const AppRoutes = require('./components/AppRoutes');
 const MainNav = require('./components/MainNavigation.android');
 const DrawerMenu = require('./components/DrawerMenu.android');
