@@ -31,15 +31,12 @@ const CardTracker = React.createClass({
 
   componentDidMount() {
     //check storage for auth token
-    AsyncStorage.getItem(TOKEN_KEY, (error, authToken) => {
-      if(authToken !== null) {
-        //attempt Firebase login using token
-        const authService = new AuthFirebaseService();
-        authService.authWithToken(authToken, (authData) => {
-          this.setState({user: authData});
-        });
-      }
-    });
+    AsyncStorage.getItem(TOKEN_KEY).then((authToken) => {
+      const authService = new AuthFirebaseService();
+      return authService.authWithToken(authToken);
+    }).then((authData) => {
+      this.setState({user: authData});
+    }).catch(() => console.warn('Unable to retrieve session'));
   },
 
   render() {
@@ -98,19 +95,16 @@ const CardTracker = React.createClass({
     this.drawer.closeDrawer();
   },
 
-  onLogin(credentials) {
-    //firebase Login
-    const authService = new AuthFirebaseService();
-    authService.authWithPassword(credentials, (authData) => {
-      //save token into storage
-      AsyncStorage.setItem(TOKEN_KEY, authData.token, (error) => {
-        if(error) {
-          console.warn('error saving auth token: ', error);
-        } else {
-          console.log('successfully saved auth token.');
-        }
-      });
-      this.setState({user: authData});
+  onLogin(authData) {
+
+    //set the component state
+    this.setState({user: authData});
+
+    //save token into storage
+    AsyncStorage.setItem(TOKEN_KEY, authData.token).then(() => {
+      console.log('successfully saved auth token.');
+    }).catch((error) => {
+      console.warn('error saving auth token: ', error)
     });
   },
 

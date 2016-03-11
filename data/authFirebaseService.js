@@ -21,28 +21,33 @@ class AuthFirebaseService extends BaseFirebaseService {
     });
   }
 
-  authWithPassword(credentials, callback) {
+  authWithPassword(credentials) {
     console.log('attempting user/pass Firebase login... ', credentials);
-    this.authRef.authWithPassword(credentials, (error, authData) => {
-        if(error) {
-          console.log('Login error: ', error);
-        } else {
-          console.log("Authenticated successfully with payload:", authData);
-          callback(authData);
-        }
+
+    return this.authRef.authWithPassword(credentials).then((authData) => {
+      console.log("Authenticated successfully with payload:", authData);
+      return authData;
+    }).catch((error) => {
+      console.log('Login error: ', error);
+      return Promise.reject(error);
     });
   }
 
-  authWithToken(token, callback) {
-    console.log('attempting token Firebase login... ', token);
-    this.authRef.authWithCustomToken(token, (error, authData) => {
-        if(error) {
-          console.log('Login error: ', error);
-        } else {
-          console.log("Authenticated successfully with payload:", authData);
-          callback(authData);
-        }
-    });
+  authWithToken(token) {
+    if(token) {
+      console.log('attempting token Firebase login... ', token);
+
+      return this.authRef.authWithCustomToken(token).then((authData) => {
+        console.log("Authenticated successfully with payload:", authData);
+        return authData;
+      }).catch((error) => {
+        console.log('Login error: ', error);
+        return Promise.reject(error);
+      });
+
+    } else {
+      return null;
+    }
   }
 
   logout() {
