@@ -18,7 +18,7 @@ var CardItem = React.createClass({
         <TouchableNativeFeedback onPress={this.openCardDetails}>
           <View style={styles.cardDescContainer}>
             <Text style={styles.cardName}>{this.props.card.name}</Text>
-            <Text style={styles.cardNum}>(...{this.props.card.last4})</Text>
+            <Text style={styles.cardNum}>...{this.props.card.last4}</Text>
           </View>
         </TouchableNativeFeedback>
         <TouchableNativeFeedback onPress={this.confirmDelete}>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     color: '#757575'
   },
   cardNum: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#9E9E9E'
   },
   actionItem: {
