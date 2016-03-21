@@ -7,6 +7,12 @@ import React, {
 var DrawerMenuItem = require('./DrawerMenuItem.android');
 
 var DrawerMenu = React.createClass({
+
+  propTypes: {
+    onMenuSelect: React.PropTypes.func.isRequired,
+    onLogout: React.PropTypes.func.isRequired
+  },
+
   render() {
     return (
       <View style={styles.container}>

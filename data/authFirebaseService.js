@@ -11,11 +11,11 @@ class AuthFirebaseService extends BaseFirebaseService {
 
   authUserWithGoogle(user, callback) {
     console.log('attempting Firebase login...', user.idToken);
-    this.authRef.authWithOAuthToken("google", user.idToken, function(error, authData) {
+    this.authRef.authWithOAuthToken('google', user.idToken, function(error, authData) {
       if (error) {
-        console.log("Login Failed!", error);
+        console.log('Login Failed!', error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log('Authenticated successfully with payload:', authData);
         callback(authData);
       }
     });
@@ -25,7 +25,7 @@ class AuthFirebaseService extends BaseFirebaseService {
     console.log('attempting user/pass Firebase login... ', credentials);
 
     return this.authRef.authWithPassword(credentials).then((authData) => {
-      console.log("Authenticated successfully with payload:", authData);
+      console.log('Authenticated successfully with payload:', authData);
       return authData;
     }).catch((error) => {
       console.log('Login error: ', error);
@@ -38,7 +38,7 @@ class AuthFirebaseService extends BaseFirebaseService {
       console.log('attempting token Firebase login... ', token);
 
       return this.authRef.authWithCustomToken(token).then((authData) => {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log('Authenticated successfully with payload:', authData);
         return authData;
       }).catch((error) => {
         console.log('Login error: ', error);

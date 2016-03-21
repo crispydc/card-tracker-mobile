@@ -5,7 +5,6 @@
 'use strict';
 import React, {
   AppRegistry,
-  Component,
   Navigator,
   DrawerLayoutAndroid,
   Dimensions,
@@ -19,14 +18,14 @@ const DrawerMenu = require('./components/DrawerMenu.android');
 const LoginScene = require('./scenes/PasswordLoginScene');
 const AuthFirebaseService = require('./data/authFirebaseService');
 
-const TOKEN_KEY = "AUTH_TOKEN";
+const TOKEN_KEY = 'AUTH_TOKEN';
 
 const CardTracker = React.createClass({
 
   getInitialState() {
     return {
       user: null
-    }
+    };
   },
 
   componentDidMount() {
@@ -62,7 +61,7 @@ const CardTracker = React.createClass({
           <StatusBar backgroundColor="#1976D2" />
           <Navigator
             initialRoute={AppRoutes.getRoute('cards')}
-            configureScene={(route, routeStack) => {
+            configureScene={(route) => {
               if(route.sceneConfig) {
                 return route.sceneConfig;
               }
@@ -77,7 +76,6 @@ const CardTracker = React.createClass({
                 //route controls its own fate
                 return React.createElement(route.scene, {navigator, uid: this.state.user.uid});
               }
-              throw new Error('Error during navigator scene rendering');
             }}
             ref={(navigator) => this.navigator = navigator}
           />
@@ -104,7 +102,7 @@ const CardTracker = React.createClass({
     AsyncStorage.setItem(TOKEN_KEY, authData.token).then(() => {
       console.log('successfully saved auth token.');
     }).catch((error) => {
-      console.warn('error saving auth token: ', error)
+      console.warn('error saving auth token: ', error);
     });
   },
 

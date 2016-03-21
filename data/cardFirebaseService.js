@@ -16,6 +16,7 @@ class CardFirebaseService extends BaseFirebaseService {
 
   deleteCard(id, callback = function() {}) {
     this.cardsRef.child(id).set(null);
+    callback();
   }
 
   onCardAdd(callback) {

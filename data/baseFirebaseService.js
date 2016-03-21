@@ -3,7 +3,7 @@
 const BASE_FIREBASE_URL = 'https://popping-fire-5373.firebaseio.com';
 
 class BaseFirebaseService {
-  constructRefURL(relURL : string) {
+  constructRefURL(relURL) {
     if(relURL.startsWith('/')) {
       return BASE_FIREBASE_URL + relURL;
     } else {

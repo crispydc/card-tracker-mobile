@@ -8,9 +8,9 @@ import React, {
 
 var LoadingIndicator = React.createClass({
   getInitialState() {
-      return {
-        show: false
-      }
+    return {
+      show: false
+    };
   },
 
   render() {

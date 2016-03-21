@@ -9,8 +9,14 @@ import React, {
 } from 'react-native';
 const Icon = require('react-native-vector-icons/MaterialIcons');
 const CardService = require('../data/cardFirebaseService');
+const Card = require('../data/card');
 
 var CardItem = React.createClass({
+
+  propTypes: {
+    card: React.PropTypes.instanceOf(Card).isRequired,
+    uid: React.PropTypes.string.isRequired
+  },
 
   render() {
     return (

@@ -3,11 +3,19 @@ import React, {
   View,
   Text,
   TouchableNativeFeedback,
-  StyleSheet
+  StyleSheet,
+  Component
 } from 'react-native';
 
 
 var DrawerMenuItem = React.createClass({
+
+  propTypes: {
+    onDrawerItemPress: React.PropTypes.func.isRequired,
+    scene: React.PropTypes.instanceOf(Component),
+    label: React.PropTypes.string.isRequired
+  },
+
   render: function() {
     return (
       <TouchableNativeFeedback onPress={() => this.props.onDrawerItemPress(this.props.scene)}>

@@ -9,6 +9,11 @@ import React, {
 
 var SubmitButton = React.createClass({
 
+  propTypes: {
+    label: React.PropTypes.string.isRequired,
+    onPress: React.PropTypes.func.isRequired
+  },
+
   render() {
     return (
       <TouchableNativeFeedback onPress={this.props.onPress} background={TouchableNativeFeedback.Ripple('#00695C')}>

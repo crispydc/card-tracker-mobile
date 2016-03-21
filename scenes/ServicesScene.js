@@ -2,7 +2,6 @@
 import React, {
   View,
   Text,
-  TouchableNativeFeedback,
   StyleSheet
 } from 'react-native';
 
@@ -25,12 +24,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F5F5'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   }
 });
 

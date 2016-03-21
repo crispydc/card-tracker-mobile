@@ -1,7 +1,6 @@
 'use strict';
 import React, {
   View,
-  Text,
   TouchableNativeFeedback,
   StyleSheet,
   Navigator
@@ -12,10 +11,15 @@ const Icon = require('react-native-vector-icons/MaterialIcons');
 
 var CardsScene = React.createClass({
 
+  propTypes: {
+    uid: React.PropTypes.string.isRequired,
+    navigator: React.PropTypes.instanceOf(Navigator).isRequired
+  },
+
   getInitialState() {
     return {
       cardlist: []
-    }
+    };
   },
 
   componentWillMount() {
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'stretch',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F5F5'
   },
   addContainer: {
     width: 50,

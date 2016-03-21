@@ -11,11 +11,16 @@ const SubmitButton = require('../components/SubmitButton.android');
 const AuthFirebaseService = require('../data/authFirebaseService');
 
 var LoginScene = React.createClass({
+
+  propTypes: {
+    onLogin: React.PropTypes.func.isRequired
+  },
+
   getInitialState() {
     return {
       email: '',
       password: ''
-    }
+    };
   },
 
   render() {
@@ -67,7 +72,7 @@ var LoginScene = React.createClass({
       //reset the focus
       this.beginInput.focus();
     });
-  },
+  }
 });
 
 const styles = StyleSheet.create({

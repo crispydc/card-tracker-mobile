@@ -1,15 +1,18 @@
 'use strict';
 import React, {
-  View,
-  ScrollView,
-  Text,
-  TouchableNativeFeedback,
   StyleSheet,
-  Navigator
+  View,
+  ScrollView
 } from 'react-native';
 const CardListItem = require('./CardListItem');
+const Card = require('../data/card');
 
 var CardList = React.createClass({
+
+  propTypes: {
+    cardList: React.PropTypes.arrayOf(Card).isRequired,
+    uid: React.PropTypes.string.isRequired
+  },
 
   render() {
     return (

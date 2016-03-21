@@ -1,16 +1,20 @@
 'use strict';
 
 import React, {
-  DrawerLayoutAndroid,
   ToolbarAndroid,
-  Dimensions,
   View,
-  StyleSheet
+  StyleSheet,
+  Component
 } from 'react-native';
-const DrawerMenu = require('./DrawerMenu.android');
 const Icon = require('react-native-vector-icons/MaterialIcons');
 
 var MainNav = React.createClass({
+
+  propTypes: {
+    scene: React.PropTypes.instanceOf(Component).isRequired,
+    onIconPress: React.PropTypes.func.isRequired,
+    navTitle: React.PropTypes.string.isRequired
+  },
 
   render: function() {
     //get current scene

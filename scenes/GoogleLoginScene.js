@@ -12,6 +12,10 @@ import {
 
 var LoginScene = React.createClass({
 
+  propTypes: {
+    onLogin: React.PropTypes.func.isRequired
+  },
+
   render() {
     return (
       <View style={styles.loginContainer}>
@@ -36,7 +40,7 @@ var LoginScene = React.createClass({
         console.log('WRONG SIGNIN:', err);
       })
       .done();
-    }
+  }
 });
 
 const styles = StyleSheet.create({

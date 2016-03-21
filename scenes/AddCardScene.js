@@ -3,12 +3,13 @@
 import React, {
   View,
   Text,
-  TouchableNativeFeedback,
   StyleSheet,
   ToolbarAndroid,
   TextInput,
-  Picker
+  Picker,
+  Navigator
 } from 'react-native';
+
 const LoadingIndicator = require('../components/LoadingIndicator.android');
 const Card = require('../data/card');
 const Icon = require('react-native-vector-icons/MaterialIcons');
@@ -16,12 +17,18 @@ const CardService = require('../data/cardFirebaseService');
 const SubmitButton = require('../components/SubmitButton.android');
 
 const AddCardScene = React.createClass({
+
+  propTypes: {
+    navigator: React.PropTypes.instanceOf(Navigator).isRequired,
+    uid: React.PropTypes.string.isRequired
+  },
+
   getInitialState() {
-      return {
-        name: '',
-        type: 'visa',
-        last4: ''
-      }
+    return {
+      name: '',
+      type: 'visa',
+      last4: ''
+    };
   },
 
   render() {
